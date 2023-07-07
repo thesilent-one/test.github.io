@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Instagram-like Page</title>
+  <style>
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgb(255, 255, 255);
+      height: 100vh;
+      overflow: hidden;
+      
+    }
+    ::-webkit-scrollbar{
+      width: 2px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #00000000; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ffffffc8; 
+}
+    
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(255, 255, 255, 0.993);
+      padding: 5px;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border:2px solid #1F4E5F;
+      color: #1F4E5F;
+      justify-content: center;
+    }
+    
+    .navbar.transparent {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    
+    .navbar-logo {
+      font-weight: bold;
+      font-size: 40px;
+      text-align: center;
+      margin:5px;
+      color: #1F4E5F;
+      text-shadow: 2px 2px 4px rgb(80, 150, 235);
+      flex: 1;
+    }
+    
+    
+      .imagee{
+        width: 40px;
+        height:40px;
+
+        }
+      .dropbtn {
+        background-color: #ffffff;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        width: 30px;
+        height:30px;
+        margin-right: 50px;
+
+      }
+
+      .dropdown {
+        position: relative;
+        display: none;  
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 50px;
+
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown-content a:hover {background-color: #ffffff;}
+
+      .dropdown:hover .dropdown-content {display: block;}
+
+
+
+    /*container---------------------------------------------------------------------------------------------  */
+    .container {
+      max-width: 550px;
+      margin: 70px auto;
+      border-radius: 4px;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    .post {
+    width: 100%;
+    max-width: 500px;    
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #1F4E5F;
+    border-radius: 4px;
+    padding: 5px; 
+    color: #1F4E5F;
+    margin-bottom:10px ;
+    margin-top:10px ;
+  }
+
+  @media screen and (max-width: 768px) {
+    .post {
+      max-width: 100%; 
+      padding: 5px; 
+    }
+  }
+
+    
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .post-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 3px solid gray;
+    }
+    
+    .post-username {
+      font-weight: bold;
+    }
+    
+    .post-image {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+    
+    .post-likes {
+      font-weight: bold;
+    }
+    
+    .post-description {
+      margin-bottom: 10px;
+    }
+
+  
+    /* Footer */
+    .footer {
+      position:relative;
+      bottom: 0;
+      left: 0;
+      width: 90;
+      background-color: rgb(0, 0, 0);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      display: block;
+    }
+
+    /* Media Query for smaller screens */
+    @media screen and (max-width: 768px) {
+      .footer {
+        padding: 10px;
+      }
+    }
+
+    
+    @media screen and (max-width: 768px) {
+      .navbar{
+        position: fixed;
+        width: 100%;
+        height: 100vh;     
+       
+      }
+
+      .container {
+        padding: 10px;
+      }
+      
+      .post {
+        padding: 5px;
+      }
+      
+      .post-avatar {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+      }
+      
+      .post-username {
+        font-size: 14px;
+      }
+      
+      .post-description {
+        font-size: 14px;
+      }
+    }
+    /* ------------------------------------------------------left side------------------------------------------------------------------ */
+    .sto-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+      float: inline-start;
+      margin: 0 100px;
+    }
+    
+    .sto-name {
+      size: 2px;
+      color: #1F4E5F;
+    }
+    
+    .sto-profile-list {
+      width: 55vw; 
+      display: none;
+      position: absolute;
+      background-color: white;
+      border:2px solid #1F4E5F;
+      text-align: center;
+      z-index: 1;
+      border-radius: 10px;
+      margin: auto;
+     
+      top: 75px;
+      overflow: scroll;
+    }
+    
+    .sto-profile {
+      width: 60px;
+      height: 60px;
+      padding: 1px;
+      border-radius: 100%;
+      margin: 10px;
+      border: 3px solid rgb(0, 0, 0);
+
+      
+    }
+    .stobutton {
+      display: inline-block;
+      text-decoration: none;
+      padding: 0px;
+      z-index: 1;
+      border-radius: 30px;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+    @media screen and (max-width: 768px) {
+      .sto-profile {
+        width: 40px;
+        height: 40px;
+      }
+
+      .stobutton {
+        padding: 20px;
+        margin-left: -15px;
+      }
+    }
+    .logo{
+      width: 60px;
+      height: 60px;
+    }
+
+/* idaft maken al likes and comments 
+  idafat 3 ni2at fo2 el post for settings and share or report
+  idafet add your storie above the stories
+  slode show for the posts    
+   */
+
+  </style>
+
+
+</head>
+<body onload="splash()">
+
+
+  <div class="navbar">
+    <div class="navbar-logo"> <img class="logo" src="mani.png">URSPACE</div>
+    <button class="stobutton" onclick="myFunction()"><img class="sto-profile" src="1.jpg" alt="Profile 1">  </button>
+    <div class="dropdown">
+      <button class="dropbtn"><img class="imagee" src="settings.png" alt="Profile Icon"></button>        
+      <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+    <div class="sto-profile-list">
+      <div class="profile">
+        <img class="sto-profile" src="1.jpg" alt="Profile 1">
+        <div class="sto-name">farid</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>        
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="2.jpg" alt="Profile 2">
+        <div class="sto-name">samir</div>
+      </div>
+      <div class="profile">
+        <img class="sto-profile" src="3.jpg" alt="Profile 3">
+        <div class="sto-name">abbas</div>
+      </div>
+      <!-- Add more profile images here -->
+  </div>
+  </div>
+
+
+  </div>
+
+ <!-- posts -->
+    <div class="container">
+ 
+        <div class="post">
+        <div class="post-header">
+            <img class="post-avatar" src="1.jpg" alt="User Avatar">
+            <span class="post-username">John Doe</span>
+            </div>
+            <img class="post-image" src="1.jpg" alt="Post Image">
+            <div class="post-likes">Likes: 100</div>
+            <div class="post-description">This is the caption for the post.</div>
+            </div>
+    <div class="post">
+        <div class="post-header">
+          <img class="post-avatar" src="3.jpg" alt="User Avatar">
+          <span class="post-username">John Doe</span>
+          </div>
+          <img class="post-image" src="4.jpg" alt="Post Image">
+          <div class="post-likes">Likes: 100</div>
+          <div class="post-description">This is the caption for the post.</div>
+      </div>
+      <div class="post">
+        <div class="post-header">
+          <img class="post-avatar" src="5.jpg" alt="User Avatar">
+          <span class="post-username">John Doe</span>
+          </div>
+          <img class="post-image" src="6.jpg" alt="Post Image">
+          <div class="post-likes">Likes: 100</div>
+          <div class="post-description">This is the caption for the post.</div>
+      </div>
+      <div class="post">
+        <div class="post-header">
+          <img class="post-avatar" src="1.jpg" alt="User Avatar">
+          <span class="post-username">John Doe</span>
+          </div>
+          <img class="post-image" src="6.jpg" alt="Post Image">
+          <div class="post-likes">Likes: 100</div>
+          <div class="post-description">This is the caption for the post.</div>
+      </div>
+      <div class="post">
+        <div class="post-header">
+          <img class="post-avatar" src="2.jpg" alt="User Avatar">
+          <span class="post-username">John Doe</span>
+          </div>
+          <img class="post-image" src="4.jpg" alt="Post Image">
+          <div class="post-likes">Likes: 100</div>
+          <div class="post-description">This is the caption for the post.</div>
+      </div>
+      <div class="post">
+        <div class="post-header">
+          <img class="post-avatar" src="3.jpg" alt="User Avatar">
+          <span class="post-username">John Doe</span>
+          </div>
+          <img class="post-image" src="1.jpg" alt="Post Image">
+          <div class="post-likes">Likes: 100</div>
+          <div class="post-description">This is the caption for the post.</div>
+      </div>
+    <!-- Add more posts here -->
+
+    
+  </div>
+  
+  <div class="footer" id="footer">
+    <p>&copy; 2023 Your Website. All rights reserved.</p>
+    <p>About Us | Contact Us | Phone: 123-456-7890</p>
+  </div>
+
+  <script>
+      var navbar = document.querySelector('.navbar');
+      var navtext = document.querySelector('.navbar-logo');
+      var stories = document.querySelector(' .sto-profile-list');
+      var sett = document.querySelector(' .dropdown');
+      var visibile = 0;
+      // var propro = document.querySelector(' .navbar-logo');
+
+// when you log in
+    function splash() {
+    setTimeout(function(){
+      navbar.style.height="60px";
+      navbar.style.width="100%";
+      document.body.style.overflow="scroll";
+      sett.style.display="inline-block";
+    },300);  
+    };
+
+    function myFunction() {
+
+        if(visibile == 0){         
+          stories.style.display= "flex"
+          visibile=1;;
+          }
+          else{
+              visibile= 0;
+              stories.style.display="none";
+              }
+    }
+
+    // function toggleList() {
+    //   var list = document.getElementById("profileList");
+    //   list.style.display = (list.style.display === "none") ? "block" : "none";
+    // }
+
+// Footer funtion
+    window.addEventListener('scroll', function() {
+  if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+    footer.style.display = 'block';
+  }else{
+    footer.style.display = 'none';
+    }
+  });
+
+    function scrollToTop() {
+            window.scrollTo(0, 0);
+          }
+          window.addEventListener('beforeunload', scrollToTop);
+
+  </script>
+</body>
+</html>
